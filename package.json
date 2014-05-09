@@ -1,0 +1,22 @@
+{
+  "name": "LowOrbit",
+  "version": "0.0.1",
+  "description": "LowOrbt",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jesalg/LowOrbit.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jesalg/LowOrbit/issues"
+  },
+  "homepage": "https://github.com/jesalg/LowOrbit",
+  "dependencies": {
+    "connect": ">= 2.8"
+  }
+}
