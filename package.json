@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/jesalg/LowOrbit",
   "dependencies": {
-    "connect": ">= 2.8"
+    "connect": "2.8.x"
   }
 }
