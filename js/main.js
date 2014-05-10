@@ -22,7 +22,6 @@ var lowOrbit = (function (window, document, $) {
 			$.ajax({
 				type: "GET",
 				dataType: "json",
-				async: false,
 				url: '/stats',
 				success: function(data) {
 					success(data);
@@ -36,14 +35,14 @@ var lowOrbit = (function (window, document, $) {
 				self.getStats(function(data) {
 					vm = new ViewModel(data)
 					ko.applyBindings(vm);
-					setTimeout(self.bindViewModel(), 15000);
+					setTimeout(self.bindViewModel(), 60000);
 				});		
 			} else {
 				self.getStats(function(data) {
 					vm.lat(data.latitude);
 					vm.lon(data.longitude);
 					vm.alt(data.altitude);
-					setTimeout(self.bindViewModel(), 15000);
+					setTimeout(self.bindViewModel(), 60000);
 				});	
 			}
 		}
