@@ -17,10 +17,10 @@
   },
   "homepage": "https://github.com/jesalg/LowOrbit",
   "dependencies": {
-    "connect": "2.8.x"
+    "connect": "2.8.8"
   },
   "engines": {
       "node": "0.10.28",
-      "npm": "1.4.x"
+      "npm": "1.4.3"
   } 
 }
