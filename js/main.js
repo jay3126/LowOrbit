@@ -36,14 +36,14 @@ var lowOrbit = (function (window, document, $) {
 				this.getStats(function(data) {
 					vm = new ViewModel(data)
 					ko.applyBindings(vm);
-					setTimeout(self.bindViewModel(), 5000);
+					setTimeout(self.bindViewModel(), 15000);
 				});		
 			} else {
 				this.getStats(function(data) {
 					vm.lat(data.latitude);
 					vm.lon(data.longitude);
 					vm.alt(data.altitude);
-					setTimeout(self.bindViewModel(), 5000);
+					setTimeout(self.bindViewModel(), 15000);
 				});	
 			}
 		}
