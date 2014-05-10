@@ -9,7 +9,7 @@ app.get('/', function(request, response) {
 
 app.get('/stats', function(request, response) {
 	process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-	http({uri:'https://api.wheretheiss.at/v1/satellites/25544',json:true}, function (error, res, body) {
+	http({uri:'https://api.wheretheiss.at/v1/satellites/25544?units=miles',json:true}, function (error, res, body) {
     	if (!error && response.statusCode == 200) {
     		response.json(body);
 		}

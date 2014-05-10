@@ -33,16 +33,18 @@
                 </object>-->
             </div>
             <div class="stats" style="position:relative; z-index:2;">
-                <h1>Lat:</h1><span data-bind="text: lat"></span>
-                <h1>Lon:</h1><span data-bind="text: lon"></span>
-                <h1>Alt:</h1><span data-bind="text: alt"></span>
+                <h1>Latitude:</h1><span data-bind="text: latitude"></span>&deg;
+                <h1>Longitude:</h1><span data-bind="text: longitude"></span>&deg;
+                <h1>Altitude:</h1><span data-bind="text: altitude"></span> miles
+                <h1>Velocity:</h1><span data-bind="text: velocity"></span> mph
+                <h1>Time:</h1><span data-bind="text: timestamp"></span> 
             </div>
         </div>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js"></script>
-        
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
 

@@ -8,10 +8,36 @@ var lowOrbit = (function (window, document, $) {
 		self.bindViewModel();
 	};
 
+	ko.extenders.numeric = function(target, precision) {
+		var result = ko.dependentObservable({
+	        read: function() {
+	           	return target().toFixed(precision); 
+	        },
+	        write: target 
+	    });
+
+	    result.raw = target;
+	    return result;
+	};
+
+	ko.extenders.time = function(target, stub) {
+		var result = ko.dependentObservable({
+	        read: function() {
+    			return moment.unix(target()).format("hh:mm:ss a");
+	        },
+	        write: target 
+	    });
+
+	    result.raw = target;
+	    return result;
+	};
+
 	var ViewModel = function(stats) {
-		this.lat = ko.observable(stats.latitude);
-	    this.lon = ko.observable(stats.longitude);
-	    this.alt = ko.observable(stats.altitude);
+		this.latitude = ko.observable(stats.latitude).extend({ numeric: 2 });
+	    this.longitude = ko.observable(stats.longitude).extend({ numeric: 2 });
+	    this.altitude = ko.observable(stats.altitude).extend({ numeric: 2 });
+	    this.velocity = ko.observable(stats.velocity).extend({ numeric: 2 });
+	    this.timestamp = ko.observable(stats.timestamp).extend({ time: true });
 	};
  
 	lowOrbit.prototype = {
@@ -35,14 +61,16 @@ var lowOrbit = (function (window, document, $) {
 				self.getStats(function(data) {
 					vm = new ViewModel(data)
 					ko.applyBindings(vm);
-					setTimeout(self.bindViewModel(), 60000);
+					setTimeout(function() { self.bindViewModel() }, 2000);
 				});		
 			} else {
 				self.getStats(function(data) {
-					vm.lat(data.latitude);
-					vm.lon(data.longitude);
-					vm.alt(data.altitude);
-					setTimeout(self.bindViewModel(), 60000);
+					vm.latitude(data.latitude);
+					vm.longitude(data.longitude);
+					vm.altitude(data.altitude);
+					vm.velocity(data.velocity);
+					vm.timestamp(data.timestamp);
+					setTimeout(function() { self.bindViewModel() }, 2000);
 				});	
 			}
 		}
