@@ -1,6 +1,6 @@
 var lowOrbit = (function (window, document, $) {
 	var stats,
-		astronauts;
+		vm;
 
 	var lowOrbit = function () {
 		var self = this;
@@ -8,54 +8,44 @@ var lowOrbit = (function (window, document, $) {
 		self.bindViewModel();
 	};
 
-	var ViewModel = function(stats, astronauts) {
-		console.log(stats);
-	    this.lat = ko.observable(stats.latitude);
+	var ViewModel = function(stats) {
+		this.lat = ko.observable(stats.latitude);
 	    this.lon = ko.observable(stats.longitude);
 	    this.alt = ko.observable(stats.altitude);
-	    this.astronauts = ko.observableArray(astronauts.people);
-	 
-	    this.fullName = ko.computed(function() {
-	        // Knockout tracks dependencies automatically. It knows that fullName depends on firstName and lastName, because these get called when evaluating fullName.
-	        return this.firstName() + " " + this.lastName();
-	    }, this);
 	};
  
 	lowOrbit.prototype = {
 	    constructor: lowOrbit,
-		getStats: function() {
-			var stats = null;
+		getStats: function(success) {
+			var self = this;
+
 			$.ajax({
-			  type: "GET",
-			  dataType: "json",
-			  async: false,
-			  url: 'http://whateverorigin.org/get?url=' + encodeURIComponent('https://api.wheretheiss.at/v1/satellites/25544') + '&callback=?',
-			  success: function(data) {
-			  	console.log(data);
-			  	stats = data.contents;
-	  		  }
-		  	});
-		  	return stats;
-		},
-		getAstronauts: function() {
-			var astronauts = null;
-			$.ajax({
-			  type: "GET",
-			  dataType: "json",
-			  async: false,
-			  url: 'http://whateverorigin.org/get?url=' + encodeURIComponent('http://www.howmanypeopleareinspacerightnow.com/space.json') + '&callback=?',
-			  success: function(data) {
-			  	console.log(data);
-			  	astronauts = data.contents;
-	  		  }
-		  	});
-		  	return astronauts;
+				type: "GET",
+				dataType: "json",
+				async: false,
+				url: '/stats',
+				success: function(data) {
+					success(data);
+			  	}
+			});
 		},
 		bindViewModel: function() {
-			//astronauts = (!astronauts) ? this.getAstronauts() : astronauts;
-			//stats = this.getStats();
-			
-			ko.applyBindings(new ViewModel(stats, astronauts));
+			var self = this;
+
+			if (typeof vm === 'undefined') {
+				this.getStats(function(data) {
+					vm = new ViewModel(data)
+					ko.applyBindings(vm);
+					setTimeout(self.bindViewModel(), 5000);
+				});		
+			} else {
+				this.getStats(function(data) {
+					vm.lat(data.latitude);
+					vm.lon(data.longitude);
+					vm.alt(data.altitude);
+					setTimeout(self.bindViewModel(), 5000);
+				});	
+			}
 		}
 	}		
 
