@@ -33,13 +33,13 @@ var lowOrbit = (function (window, document, $) {
 			var self = this;
 
 			if (typeof vm === 'undefined') {
-				this.getStats(function(data) {
+				self.getStats(function(data) {
 					vm = new ViewModel(data)
 					ko.applyBindings(vm);
 					setTimeout(self.bindViewModel(), 15000);
 				});		
 			} else {
-				this.getStats(function(data) {
+				self.getStats(function(data) {
 					vm.lat(data.latitude);
 					vm.lon(data.longitude);
 					vm.alt(data.altitude);
