@@ -41,6 +41,12 @@ var lowOrbit = (function (window, document, $) {
 	    this.timestamp = ko.observable(stats.timestamp).extend({ time: true });
 	    this.astronauts = ko.observableArray(stats.astronauts);
 	    this.location = ko.observable('Ocean');
+	    this.flag = ko.computed(function() {
+	    	if(this.location().short_name)
+	        	return 'http://www.geonames.org/flags/s/' + this.location().short_name.toLowerCase() + '.png';
+	        else
+	        	return '';
+	    }, this);
 
 	    var updateLocation = function() {
 	    	$.ajax({
@@ -51,7 +57,7 @@ var lowOrbit = (function (window, document, $) {
 					$.each(data['results'], function(index, result) {
 						$.each(result['address_components'], function(index, component) {
 							if ($.inArray('country', component['types']) > -1) {
-								self.location(component['long_name']);
+								self.location(component);
 							}
 						});
 					});
