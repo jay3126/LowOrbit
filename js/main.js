@@ -33,11 +33,32 @@ var lowOrbit = (function (window, document, $) {
 	};
 
 	var ViewModel = function(stats) {
+		var self = this;
 		this.latitude = ko.observable(stats.latitude).extend({ numeric: 2 });
 	    this.longitude = ko.observable(stats.longitude).extend({ numeric: 2 });
 	    this.altitude = ko.observable(stats.altitude).extend({ numeric: 2 });
 	    this.velocity = ko.observable(stats.velocity).extend({ numeric: 2 });
 	    this.timestamp = ko.observable(stats.timestamp).extend({ time: true });
+	    this.location = ko.observable('Ocean');
+
+	    var updateLocation = function() {
+	    	$.ajax({
+				type: "GET",
+				dataType: "json",
+				url: 'http://maps.googleapis.com/maps/api/geocode/json?latlng='+self.latitude.raw()+','+self.longitude.raw()+'&sensor=true',
+				success: function(data) {
+					$.each(data['results'], function(index, result) {
+						$.each(result['address_components'], function(index, component) {
+							if ($.inArray('country', component['types']) > -1) {
+								self.location(component['long_name']);
+							}
+						});
+					});
+			  	}
+			});
+	    };
+
+	    this.latitude.subscribe(updateLocation);
 	};
  
 	lowOrbit.prototype = {
@@ -45,7 +66,7 @@ var lowOrbit = (function (window, document, $) {
 		getStats: function(success) {
 			var self = this;
 
-			$.ajax({
+			return $.ajax({
 				type: "GET",
 				dataType: "json",
 				url: '/stats',
@@ -56,23 +77,26 @@ var lowOrbit = (function (window, document, $) {
 		},
 		bindViewModel: function() {
 			var self = this;
+			var response = null;
 
 			if (typeof vm === 'undefined') {
-				self.getStats(function(data) {
+				response = self.getStats(function(data) {
 					vm = new ViewModel(data)
 					ko.applyBindings(vm);
-					setTimeout(function() { self.bindViewModel() }, 2000);
 				});		
 			} else {
-				self.getStats(function(data) {
+				response = self.getStats(function(data) {
 					vm.latitude(data.latitude);
 					vm.longitude(data.longitude);
 					vm.altitude(data.altitude);
 					vm.velocity(data.velocity);
 					vm.timestamp(data.timestamp);
-					setTimeout(function() { self.bindViewModel() }, 2000);
 				});	
 			}
+
+			response.always(function() {
+				setTimeout(function() { self.bindViewModel() }, 2000);
+			})
 		}
 	}		
 
