@@ -39,6 +39,13 @@
                 <h1>Altitude:</h1><span data-bind="text: altitude"></span> miles
                 <h1>Velocity:</h1><span data-bind="text: velocity"></span> mph
                 <h1>Time:</h1><span data-bind="text: timestamp"></span> 
+                <h1>Astronauts:</h1>
+                <ul data-bind="foreach: astronauts">
+                    <li>
+                        <strong><span data-bind="text: name"></span></strong> 
+                        <span data-bind="text: country"></span>
+                    </li>
+                </ul>
             </div>
         </div>
 

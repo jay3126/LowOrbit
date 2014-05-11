@@ -39,6 +39,7 @@ var lowOrbit = (function (window, document, $) {
 	    this.altitude = ko.observable(stats.altitude).extend({ numeric: 2 });
 	    this.velocity = ko.observable(stats.velocity).extend({ numeric: 2 });
 	    this.timestamp = ko.observable(stats.timestamp).extend({ time: true });
+	    this.astronauts = ko.observableArray(stats.astronauts);
 	    this.location = ko.observable('Ocean');
 
 	    var updateLocation = function() {
@@ -75,14 +76,32 @@ var lowOrbit = (function (window, document, $) {
 			  	}
 			});
 		},
+		getAstronauts: function(success) {
+			var self = this;
+
+			return $.ajax({
+				type: "GET",
+				dataType: "json",
+				url: '/astronauts',
+				success: function(data) {
+					success(data);
+			  	}
+			});
+		},
 		bindViewModel: function() {
 			var self = this;
 			var response = null;
 
 			if (typeof vm === 'undefined') {
 				response = self.getStats(function(data) {
-					vm = new ViewModel(data)
-					ko.applyBindings(vm);
+					var astronauts = null;
+					self.getAstronauts(function(data) {
+						astronauts = data.people;
+					}).always(function() {
+						data.astronauts = astronauts;
+						vm = new ViewModel(data)
+						ko.applyBindings(vm);
+					})
 				});		
 			} else {
 				response = self.getStats(function(data) {

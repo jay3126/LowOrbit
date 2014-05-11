@@ -16,6 +16,15 @@ app.get('/stats', function(request, response) {
 	});
 });
 
+app.get('/astronauts', function(request, response) {
+	process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+	http({uri:'http://www.howmanypeopleareinspacerightnow.com/space.json',json:true}, function (error, res, body) {
+    	if (!error && response.statusCode == 200) {
+    		response.json(body);
+		}
+	});
+});
+
 app.configure(function() {
     app.use('/', express.static(__dirname + '/'));
 });
