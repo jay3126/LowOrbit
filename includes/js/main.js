@@ -11,7 +11,7 @@ var lowOrbit = (function (window, document, $) {
 	ko.extenders.numeric = function(target, precision) {
 		var result = ko.dependentObservable({
 	        read: function() {
-	           	return target().toFixed(precision); 
+	           	return target().toFixed(precision).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); 
 	        },
 	        write: target 
 	    });
@@ -41,13 +41,7 @@ var lowOrbit = (function (window, document, $) {
 	    this.timestamp = ko.observable(stats.timestamp).extend({ time: true });
 	    this.astronauts = ko.observableArray(stats.astronauts);
 	    this.location = ko.observable('Ocean');
-	    this.flag = ko.computed(function() {
-	    	if(this.location().short_name)
-	        	return 'http://www.geonames.org/flags/s/' + this.location().short_name.toLowerCase() + '.png';
-	        else
-	        	return '';
-	    }, this);
-
+	    
 	    var updateLocation = function() {
 	    	$.ajax({
 				type: "GET",
@@ -120,7 +114,7 @@ var lowOrbit = (function (window, document, $) {
 			}
 
 			response.always(function() {
-				setTimeout(function() { self.bindViewModel() }, 2000);
+				setTimeout(function() { self.bindViewModel() }, 1000);
 			})
 		}
 	}		

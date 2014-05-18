@@ -1,60 +1,163 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-        <link rel="stylesheet" href="css/normalize.min.css">
-        <link rel="stylesheet" href="css/main.css">
-
-        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        <title>Low Orbit - A Live View of the International Space Station</title>
+        <link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+        <link href="includes/icons/solid.css" rel="stylesheet" type="text/css">
+        <link href="includes/app.css" rel="stylesheet" type="text/css">
+        
     </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+    <body>        
+        <div id="toplogo"></div>
+        <div id="topnav">
+            <a href="#" class="topnav_active">ISS View</a>
+            <a href="#" class="topnav_active">Options</a>
+            <a href="#" class="topnav_active">About</a>
+        </div>
 
-        <div style="width:100%;height:100%;position:relative;">
-            <div style="position:absolute; z-index:1;width:100%;height:100%;">
-                <!--<object width="100%" height="100%" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000">
-                  <param name="flashvars" value="cid=17074538&amp;autoplay=true"/>
-                  <param name="allowfullscreen" value="true"/>
-                  <param name="allowscriptaccess" value="always"/>
-                  <param name="src" value="http://www.ustream.tv/flash/viewer.swf"/>
-                  <param name="wmode" value="transparent">
-                  <PARAM NAME="SCALE" VALUE="exactfit">
-                  <embed flashvars="cid=17074538&amp;autoplay=true" width="100%" height="100%" SCALE="exactfit" allowfullscreen="true" allowscriptaccess="always" wmode="transparent" src="http://www.ustream.tv/flash/viewer.swf" type="application/x-shockwave-flash"></embed>
-                </object>-->
+        <div id="contentwrap">
+            <!-- LARGE HUD-->
+            <div id="hudwrap">
+                <div class="topruler"></div>
+
+                <div id="clock" data-bind="text: timestamp">
+                </div>
+
+                <div id="databody">
+                    <a class="astronautslink" href="#"><span data-bind="text: astronauts().length"></span> Astronauts Aboard</a>
+
+                    <div id="altitude" data-bind="text: altitude">
+                    </div>
+
+                    <div id="milesabove">
+                        MILES ABOVE
+                    </div>
+
+                    <div id="location">
+                        <a href="#" data-bind="text: location().long_name || location()"></a>
+                    </div>
+
+                    <div id="latlong">
+                        <span data-bind="text: latitude() + '&deg;'"></span><span data-bind="text: longitude() + '&deg;'"></span>
+                    </div>
+                </div>
+
+                <div class="speed">
+                    <span data-bind="text: velocity"></span><br>
+                    <span class="units">MPH</span>
+                </div>
+
+                <div class="bottomruler"></div>
             </div>
-            <div class="stats" style="position:relative; z-index:2;">
-                <h1>Latitude:</h1><span data-bind="text: latitude"></span>&deg;
-                <h1>Longitude:</h1><span data-bind="text: longitude"></span>&deg;
-                <h1>Location:</h1><img data-bind="attr: {src: flag}, visible: flag">&nbsp;<span data-bind="text: location().long_name || location()"></span>
-                <h1>Altitude:</h1><span data-bind="text: altitude"></span> miles
-                <h1>Velocity:</h1><span data-bind="text: velocity"></span> mph
-                <h1>Time:</h1><span data-bind="text: timestamp"></span> 
-                <h1>Astronauts:</h1>
-                <ul data-bind="foreach: astronauts">
-                    <li>
-                        <strong><span data-bind="text: name"></span></strong> 
-                        <span data-bind="text: country"></span>
-                    </li>
-                </ul>
+            
+            <!-- SMALL HUD
+            <div id="smallhudwrap">
+                <div class="topruler"></div>
+                
+                <div id="clock">
+                    3:47:04:GMT
+                </div>
+                <a class="astronautslink_s" href="#">6 Astronauts Aboard</a>
+                <div class="speed_s">
+                    17,142 MPH
+                </div>
+                <div id="location_s">
+                    <span>262.02 MILES ABOVE</span>
+                    <a href="#">French Polynesia</a>
+                </div>
+                <div class="longitude">
+                    50.83&deg;N
+                </div>
+                <div class="latitude">
+                    102.17&deg;W
+                </div>
+
+                <div class="bottomruler"></div>
+            </div>-->
+            
+            <!-- OPTIONS SECTION 
+            
+            <div id="optionswrap" class="staticwrap">
+                <div class="optionsblock">
+                    <div class="optionscontent">
+                        <h2>OPTIONS</h2>
+                        <p class="introcopy">You can customize how Low Orbit appears. Adjust the data that is displayed as well as the background.</p>
+                        <div class="optionsrow">
+                            <span class="optionsrowtitle">Data Display</span>
+                            <ul>
+                                <li><a href="#">Large</a></li>
+                                <li><a href="#">Small</a></li>
+                                <li><a href="#">None</a></li>
+                            </ul>
+                        </div>
+                        <div class="optionsrow">
+                            <span class="optionsrowtitle">Background</span>
+                            <ul>
+                                <li><a href="#">Video</a></li>
+                                <li><a href="#">Stream</a></li>
+                                <li><a href="#">Photo</a></li>
+                            </ul>
+                        </div>
+                        <div class="optionsquote">
+                         For those who have seen the Earth from space, and for the hundreds and perhaps thousands more who will, the experience most certainly changes your perspective. The things that we share in our world are far more valuable than those which divide us.
+    <span>— Donald Williams</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="navline"></div>
+            </div>-->
+            
+            <!-- ABOUT SECTION 
+            <div id="aboutwrap" class="staticwrap">
+                <div class="aboutcontent">
+                    <div class="aboutlogo"></div>
+                    <div class="description">A live connection with the International Space Station using data and visuals.</div>
+                    <div class="aboutcopy">
+                        On April 30, 2014 astronauts on the International Space Station fixed high-definition cameras to the outside of the structure and started streaming a 24/7 live view of earth to us here on terrafirma. This view of our own blue planet somehow shortened the distance between us down here and them up there. We wanted to celebrate this closeness with an experience that unified some of the data we have streaming at us from the ISS and it’s passengers.
+    <p>Low Orbit was conceived of and built my <a href="http://www.hellomarcus.com" class="emaillink" target="_blank">Marcus Edvalson</a> and <a href="http://jes.al/" class="emaillink" target="_blank">Jesal Gadhia</a>. If anyone from a space agency or related company sees this and would like to work together on something, please don’t hesitate to contact us :)</p>
+                        <p class="contactlink">Email us at <a href="#" class="emaillink">hello@loworbit.co</a></p>
+                    </div>
+                    
+                    <div class="credit">
+                        <p><span>Imagery Shot By</span>The astronauts of NASA, Roscosmos, ESA, JAXA and CSA</p>
+                        <p><span>Video</span>Edited by <a href="https://www.youtube.com/channel/UC1yqIgelH1IgU0bA0eXeDiA" class="emaillink" target="_blank">Sebastiansz</a> and streaming by <a href="http://www.ustream.tv/channel/iss-hdev-payload" class="emaillink" target="_blank">Ustream</a> and <a href="https://www.youtube.com/watch?v=P5_GlAOCHyE&list=PL746FAD2B2C91D906" class="emaillink" target="_blank">YouTube</a></p>
+                    </div>
+                </div>
+            
+                <div class="navline"></div>
+            </div>-->
+        </div>
+        
+        <div id="disabled">
+            <div class="aboutcontent">
+            <div class="aboutlogo"></div>
+                <div class="description">Houston, we have a problem!</div>
+                <div class="aboutcopy">
+                    Low Orbit is better at larger sizes, so we chose to disable it at this size. Make your browser window larger, or try a different device.
+                </div>
             </div>
         </div>
 
+        <div id="videowrap">
+            <!--<iframe src="http://www.ustream.tv/embed/17074538?v=3&amp;wmode=direct&autoplay=true" frameborder="0" style="border: 0px none transparent;overflow:hidden;height:100%;width:100%" height="100%" width="100%" scrolling=“no”></iframe>
+             
+      <iframe id="ytplayer" type="text/html" height="100%" width="100%" 
+    src="https://www.youtube.com/embed/P5_GlAOCHyE?autoplay=1&controls=0&loop=1&modestbranding=1&rel=0&showinfo=0&autohide=1&iv_load_policy=3"
+    frameborder="0" volume="0"></iframe>-->
+        </div>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
+        <script src="includes/js/center.js"></script>
+        <script src="includes/js/main.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
