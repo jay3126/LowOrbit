@@ -32,7 +32,7 @@ var lowOrbit = (function (window, document, $) {
 	    return result;
 	};
 
-	var ViewModel = function(stats) {
+	var ViewModel = function(stats, lo) {
 		var self = this;
 		this.latitude = ko.observable(stats.latitude).extend({ numeric: 2 });
 	    this.longitude = ko.observable(stats.longitude).extend({ numeric: 2 });
@@ -41,8 +41,12 @@ var lowOrbit = (function (window, document, $) {
 	    this.timestamp = ko.observable(stats.timestamp).extend({ time: true });
 	    this.astronauts = ko.observableArray(stats.astronauts);
 	    this.location = ko.observable('Ocean');
-	    
-	    var updateLocation = function() {
+
+	    this.displayType = ko.observable('largeHUDTemplate');
+	    this.backgroundType = ko.observable('videoTemplate');
+	    this.currentTemplate = ko.observable('issTemplate');
+
+	    this.updateLocation = function() {
 	    	$.ajax({
 				type: "GET",
 				dataType: "json",
@@ -58,8 +62,25 @@ var lowOrbit = (function (window, document, $) {
 			  	}
 			});
 	    };
+		this.latitude.subscribe(this.updateLocation);
 
-	    this.latitude.subscribe(updateLocation);
+	    this.initUI = function() {
+	    	lo.setContent();
+	    }
+
+	    this.changeView = function(template) {
+	    	self.currentTemplate(template);
+	    }
+
+	    this.changeDisplay = function(display) {
+	    	self.displayType(display);
+	    	self.changeView('issTemplate');
+	    }
+
+	    this.changeBackground = function(background) {
+	    	self.backgroundType(background);
+	    	self.changeView('issTemplate');
+	    }
 	};
  
 	lowOrbit.prototype = {
@@ -99,7 +120,7 @@ var lowOrbit = (function (window, document, $) {
 						astronauts = data.people;
 					}).always(function() {
 						data.astronauts = astronauts;
-						vm = new ViewModel(data)
+						vm = new ViewModel(data, self)
 						ko.applyBindings(vm);
 					})
 				});		
@@ -116,6 +137,41 @@ var lowOrbit = (function (window, document, $) {
 			response.always(function() {
 				setTimeout(function() { self.bindViewModel() }, 1000);
 			})
+		},
+		getWindowHeight: function() {
+			var windowHeight = 0;
+			if (typeof(window.innerHeight) == 'number') {
+				windowHeight = window.innerHeight;
+			}
+			else {
+				if (document.documentElement && document.documentElement.clientHeight) {
+					windowHeight = document.documentElement.clientHeight;
+				}
+				else {
+					if (document.body && document.body.clientHeight) {
+						windowHeight = document.body.clientHeight;
+					}
+				}
+			}
+			return windowHeight;
+		},
+		setContent: function() {
+			if (document.getElementById) {
+				var windowHeight = this.getWindowHeight();
+				if (windowHeight > 0) {
+					var contentElement = document.getElementById('databody');
+					if (contentElement) {
+						var contentHeight = contentElement.offsetHeight;
+						if (windowHeight - contentHeight > 0) {
+							contentElement.style.position = 'relative';
+							contentElement.style.top = ((windowHeight / 2) - (contentHeight / 2)) + 'px';
+						}
+						else {
+							contentElement.style.position = 'static';
+						}
+					}
+				}
+			}
 		}
 	}		
 
