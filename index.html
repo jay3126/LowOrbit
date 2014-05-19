@@ -48,7 +48,7 @@
         </script>
 
         <script id="photoTemplate" type="text/html">
-            Coming Soon...
+            <!-- TODO -->
         </script>
 
         <script id="issTemplate" type="text/html">
@@ -64,7 +64,7 @@
             </div>
 
             <div id="databody">
-                <a class="astronautslink" href="#"><span data-bind="text: astronauts().length"></span> Astronauts Aboard</a>
+                <a class="astronautslink" href="http://www.howmanypeopleareinspacerightnow.com/" target="_blank"><span data-bind="text: astronauts().length"></span> Astronauts Aboard</a>
 
                 <div id="altitude" data-bind="text: altitude">
                 </div>
@@ -74,7 +74,7 @@
                 </div>
 
                 <div id="location">
-                    <a href="#" data-bind="text: location().long_name || location()"></a>
+                    <a href="#" target="_blank" data-bind="text: location().long_name || location(), attr: { href: 'https://maps.google.com/maps?q=loc:' + latitude() + ',' + longitude() }"></a>
                 </div>
 
                 <div id="latlong">
@@ -100,7 +100,7 @@
             <div id="clock" data-bind="text: timestamp">
                 
             </div>
-            <a class="astronautslink_s" href="#"><span data-bind="text: astronauts().length"></span> Astronauts Aboard</a>
+            <a class="astronautslink_s" href="http://www.howmanypeopleareinspacerightnow.com/" target="_blank"><span data-bind="text: astronauts().length"></span> Astronauts Aboard</a>
             <div class="speed_s" data-bind="text: velocity() + ' MPH'">
             </div>
             <div id="location_s">
@@ -159,7 +159,7 @@
                 <div class="description">A live connection with the International Space Station using data and visuals.</div>
                 <div class="aboutcopy">
                     On April 30, 2014 astronauts on the International Space Station fixed high-definition cameras to the outside of the structure and started streaming a 24/7 live view of earth to us here on terrafirma. This view of our own blue planet somehow shortened the distance between us down here and them up there. We wanted to celebrate this closeness with an experience that unified some of the data we have streaming at us from the ISS and it’s passengers.
-<p>Low Orbit was conceived of and built my <a href="http://www.hellomarcus.com" class="emaillink" target="_blank">Marcus Edvalson</a> and <a href="http://jes.al/" class="emaillink" target="_blank">Jesal Gadhia</a>. If anyone from a space agency or related company sees this and would like to work together on something, please don’t hesitate to contact us :)</p>
+<p>Low Orbit was conceived of and built by <a href="http://www.hellomarcus.com" class="emaillink" target="_blank">Marcus Edvalson</a> and <a href="http://jes.al/" class="emaillink" target="_blank">Jesal Gadhia</a>. If anyone from a space agency or related company sees this and would like to work together on something, please don’t hesitate to contact us :)</p>
                     <p class="contactlink">Email us at <a href="#" class="emaillink">hello@loworbit.co</a></p>
                 </div>
                 

@@ -50,7 +50,7 @@ var lowOrbit = (function (window, document, $) {
 	    	$.ajax({
 				type: "GET",
 				dataType: "json",
-				url: 'http://maps.googleapis.com/maps/api/geocode/json?latlng='+self.latitude.raw()+','+self.longitude.raw()+'&sensor=true',
+				url: 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyC6YRqrRWcKpIg5G9Dt0ZyQ5KuQF79vGvA&latlng='+self.latitude.raw()+','+self.longitude.raw()+'&sensor=true',
 				success: function(data) {
 					$.each(data['results'], function(index, result) {
 						$.each(result['address_components'], function(index, component) {
