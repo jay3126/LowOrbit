@@ -78,7 +78,7 @@
                 </div>
 
                 <div id="latlong">
-                    <span data-bind="text: latitude() + '&deg;'"></span><span data-bind="text: longitude() + '&deg;'"></span>
+                    <span data-bind="text: latitude() + '&deg;' + (latitude() > 0 ? 'N' : 'S')"></span><span data-bind="text: longitude() + '&deg;' + (longitude() > 0 ? 'E' : 'W')"></span>
                 </div>
             </div>
 
@@ -107,9 +107,9 @@
                 <span><span data-bind="text: altitude"></span> MILES ABOVE</span>
                 <a href="#" data-bind="text: location().long_name || location()"></a>
             </div>
-            <div class="longitude" data-bind="text: latitude() + '&deg;'">
+            <div class="longitude" data-bind="text: latitude() + '&deg;' + (latitude() > 0 ? 'N' : 'S')">
             </div>
-            <div class="latitude" data-bind="text: longitude() + '&deg;'">
+            <div class="latitude" data-bind="text: longitude() + '&deg;' + (longitude() > 0 ? 'E' : 'W')">
             </div>
 
             <div class="bottomruler"></div>
