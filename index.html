@@ -74,7 +74,7 @@
                 </div>
 
                 <div id="location">
-                    <a href="#" target="_blank" data-bind="text: location().long_name || location(), attr: { href: 'https://maps.google.com/maps?q=loc:' + latitude() + ',' + longitude() }"></a>
+                    <a href="#" target="_blank" data-bind="text: location().long_name || location(), attr: { href: 'https://maps.google.com/maps?q=' + latitude() + ',' + longitude() + '&z=18' }"></a>
                 </div>
 
                 <div id="latlong">
@@ -105,7 +105,7 @@
             </div>
             <div id="location_s">
                 <span><span data-bind="text: altitude"></span> MILES ABOVE</span>
-                <a href="#" data-bind="text: location().long_name || location()"></a>
+                <a href="#" data-bind="text: location().long_name || location(), attr: { href: 'https://maps.google.com/maps?q=' + latitude() + ',' + longitude() + '&z=18' }"></a>
             </div>
             <div class="longitude" data-bind="text: latitude() + '&deg;' + (latitude() > 0 ? 'N' : 'S')">
             </div>

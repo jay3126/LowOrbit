@@ -45,9 +45,10 @@ var lowOrbit = (function (window, document, $) {
 	    this.backgroundType = ko.observable('videoTemplate');
 	    this.currentTemplate = ko.observable('issTemplate');
 
-		this.location = ko.computed(function() {
-			var location = 'Ocean';
-	        $.ajax({
+		this.location = ko.observable('Ocean');
+
+		ko.computed(function() {
+			$.ajax({
 				type: "GET",
 				dataType: "json",
 				url: 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDPCYl0Dyk03vGAAKAwRvzElBczHCeubYA&latlng='+self.latitude.raw()+','+self.longitude.raw()+'&sensor=true',
@@ -55,13 +56,12 @@ var lowOrbit = (function (window, document, $) {
 					$.each(data['results'], function(index, result) {
 						$.each(result['address_components'], function(index, component) {
 							if ($.inArray('country', component['types']) > -1) {
-								location = component;
+								self.location(component);
 							}
 						});
 					});
 			  	}
 			});
-			return location;
 	    }, this).extend({ rateLimit: 60000 });
 
 	    this.initUI = function() {
