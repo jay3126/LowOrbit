@@ -40,29 +40,29 @@ var lowOrbit = (function (window, document, $) {
 	    this.velocity = ko.observable(stats.velocity).extend({ numeric: 2 });
 	    this.timestamp = ko.observable(stats.timestamp).extend({ time: true });
 	    this.astronauts = ko.observableArray(stats.astronauts);
-	    this.location = ko.observable('Ocean');
-
+	    
 	    this.displayType = ko.observable('largeHUDTemplate');
 	    this.backgroundType = ko.observable('videoTemplate');
 	    this.currentTemplate = ko.observable('issTemplate');
 
-	    this.updateLocation = function() {
-	    	$.ajax({
+		this.location = ko.computed(function() {
+			var location = 'Ocean';
+	        $.ajax({
 				type: "GET",
 				dataType: "json",
-				url: 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyC6YRqrRWcKpIg5G9Dt0ZyQ5KuQF79vGvA&latlng='+self.latitude.raw()+','+self.longitude.raw()+'&sensor=true',
+				url: 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDPCYl0Dyk03vGAAKAwRvzElBczHCeubYA&latlng='+self.latitude.raw()+','+self.longitude.raw()+'&sensor=true',
 				success: function(data) {
 					$.each(data['results'], function(index, result) {
 						$.each(result['address_components'], function(index, component) {
 							if ($.inArray('country', component['types']) > -1) {
-								self.location(component);
+								location = component;
 							}
 						});
 					});
 			  	}
 			});
-	    };
-		this.latitude.subscribe(this.updateLocation);
+			return location;
+	    }, this).extend({ rateLimit: 60000 });
 
 	    this.initUI = function() {
 	    	lo.setContent();
@@ -122,7 +122,7 @@ var lowOrbit = (function (window, document, $) {
 						data.astronauts = astronauts;
 						vm = new ViewModel(data, self)
 						ko.applyBindings(vm);
-					})
+					});
 				});		
 			} else {
 				response = self.getStats(function(data) {
