@@ -14,11 +14,11 @@
         
     </head>
     <body>        
-        <div id="toplogo"></div>
+        <div data-bind="click: showHome" id="toplogo"></div>
         <div id="topnav">
-            <a href="#" data-bind="click: changeView.bind($data, 'issTemplate')" class="topnav_active">ISS View</a>
-            <a href="#" data-bind="click: changeView.bind($data, 'optionsTemplate')" class="topnav_active">Options</a>
-            <a href="#" data-bind="click: changeView.bind($data, 'aboutTemplate')" class="topnav_active">About</a>
+            <a href="#" data-bind="click: changeView.bind($data, event, 'issTemplate')" class="topnav_active topnav_selected">ISS View</a>
+            <a href="#" data-bind="click: changeView.bind($data, event, 'optionsTemplate')" class="topnav_active">Options</a>
+            <a href="#" data-bind="click: changeView.bind($data, event, 'aboutTemplate')" class="topnav_active">About</a>
         </div>
 
         <div id="contentwrap" data-bind="template: { name: currentTemplate, afterRender: $root.initUI }">
@@ -127,17 +127,17 @@
                     <div class="optionsrow">
                         <span class="optionsrowtitle">Data Display</span>
                         <ul>
-                            <li><a data-bind="click: changeDisplay.bind($data, 'largeHUDTemplate')" href="#">Large</a></li>
-                            <li><a data-bind="click: changeDisplay.bind($data, 'smallHUDTemplate')" href="#">Small</a></li>
-                            <li><a data-bind="click: changeDisplay.bind($data, false)" href="#">None</a></li>
+                            <li><a data-bind="click: changeDisplay.bind($data, event, false)" href="#">None</a></li>
+                            <li><a data-bind="click: changeDisplay.bind($data, event, 'smallHUDTemplate')" href="#">Small</a></li>
+                            <li><a class="selected" data-bind="click: changeDisplay.bind($data, event, 'largeHUDTemplate')" href="#">Large</a></li>
                         </ul>
                     </div>
                     <div class="optionsrow">
                         <span class="optionsrowtitle">Background</span>
                         <ul>
-                            <li><a data-bind="click: changeBackground.bind($data, 'videoTemplate')" href="#">Video</a></li>
-                            <li><a data-bind="click: changeBackground.bind($data, 'streamTemplate')" href="#">Stream</a></li>
-                            <li><a data-bind="click: changeBackground.bind($data, 'photoTemplate')" href="#">Photo</a></li>
+                            <li><a data-bind="click: changeBackground.bind($data, event, 'photoTemplate')" href="#">Photo</a></li>
+                            <li><a data-bind="click: changeBackground.bind($data, event, 'videoTemplate')" href="#">Video</a></li>
+                            <li><a class="selected" data-bind="click: changeBackground.bind($data, event, 'streamTemplate')" href="#">Stream</a></li>
                         </ul>
                     </div>
                     <div class="optionsquote">

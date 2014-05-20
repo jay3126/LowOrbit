@@ -73,7 +73,9 @@ a.topbtn:hover,a.topbtn:active {
 }
 
 .topnav_selected {
-	color: #fff;
+	color: #fff !important;
+	cursor: default !important;
+	border-bottom: none  !important;
 }
 
 /* Wrappers */
@@ -195,6 +197,7 @@ overflow: scroll;
 	background-size: auto 100% ;
 	z-index: 1;
 	width: 190px;
+	cursor: pointer;
 }
 
 /* Options Styles */
@@ -264,8 +267,14 @@ h2 {
 	text-decoration: underline;
 }
 
+.optionsrow ul li a.selected {
+	color: #fff;
+	text-decoration: none;
+	cursor: default;
+}
+
 .optionsquote {
-border-top:1px solid #21323e;
+	border-top:1px solid #21323e;
 	font-size: 14px;
 	text-transform: none;
 	font-weight: 300;

@@ -42,7 +42,7 @@ var lowOrbit = (function (window, document, $) {
 	    this.astronauts = ko.observableArray(stats.astronauts);
 	    
 	    this.displayType = ko.observable('largeHUDTemplate');
-	    this.backgroundType = ko.observable('videoTemplate');
+	    this.backgroundType = ko.observable('streamTemplate');
 	    this.currentTemplate = ko.observable('issTemplate');
 
 		this.location = ko.observable('Ocean');
@@ -68,18 +68,28 @@ var lowOrbit = (function (window, document, $) {
 	    	lo.setContent();
 	    }
 
-	    this.changeView = function(template) {
+	    this.showHome = function() {
+    		self.currentTemplate('issTemplate');
+    		$('#topnav > a').removeClass("topnav_selected");
+    		$('#topnav > a').first().addClass("topnav_selected");
+	    }
+
+	    this.changeView = function(event, template) {
+	    	$(event.target).siblings().removeClass("topnav_selected");
+	    	$(event.target).addClass("topnav_selected");
 	    	self.currentTemplate(template);
 	    }
 
-	    this.changeDisplay = function(display) {
+	    this.changeDisplay = function(event, display) {
+	    	$(event.target).parent().siblings().find('a').removeClass("selected");
+	    	$(event.target).addClass("selected");
 	    	self.displayType(display);
-	    	self.changeView('issTemplate');
 	    }
 
-	    this.changeBackground = function(background) {
+	    this.changeBackground = function(event, background) {
+	    	$(event.target).parent().siblings().find('a').removeClass("selected");
+	    	$(event.target).addClass("selected");
 	    	self.backgroundType(background);
-	    	self.changeView('issTemplate');
 	    }
 	};
  
