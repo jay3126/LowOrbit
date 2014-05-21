@@ -68,27 +68,15 @@ var lowOrbit = (function (window, document, $) {
 	    	lo.setContent();
 	    }
 
-	    this.showHome = function() {
-    		self.currentTemplate('issTemplate');
-    		$('#topnav > a').removeClass("topnav_selected");
-    		$('#topnav > a').first().addClass("topnav_selected");
-	    }
-
 	    this.changeView = function(event, template) {
-	    	$(event.target).siblings().removeClass("topnav_selected");
-	    	$(event.target).addClass("topnav_selected");
 	    	self.currentTemplate(template);
 	    }
 
 	    this.changeDisplay = function(event, display) {
-	    	$(event.target).parent().siblings().find('a').removeClass("selected");
-	    	$(event.target).addClass("selected");
 	    	self.displayType(display);
 	    }
 
 	    this.changeBackground = function(event, background) {
-	    	$(event.target).parent().siblings().find('a').removeClass("selected");
-	    	$(event.target).addClass("selected");
 	    	self.backgroundType(background);
 	    }
 	};
