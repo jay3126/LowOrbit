@@ -42,7 +42,7 @@ var lowOrbit = (function (window, document, $) {
 	    this.astronauts = ko.observableArray(stats.astronauts);
 	    
 	    this.displayType = ko.observable('largeHUDTemplate');
-	    this.backgroundType = ko.observable('streamTemplate');
+	    this.backgroundType = ko.observable(stats.visibility == 'daylight' ? 'streamTemplate' : 'videoTemplate');
 	    this.currentTemplate = ko.observable('issTemplate');
 
 		this.location = ko.observable('Ocean');
