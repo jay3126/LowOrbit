@@ -453,7 +453,7 @@ a.astronautslink_s:hover, a.astronautslink_s:active {
 #milesabove {
 	font-size:110%;
 	letter-spacing:.2em;
-	color:#77bfea;
+	color:#ade0ff;
 	margin:.1% 0 1%;
 }
 
@@ -528,7 +528,7 @@ a.astronautslink_s:hover, a.astronautslink_s:active {
 	bottom:30px;
 	left:0;
 	text-align:center;
-	color:#77bfea;
+	color:#ade0ff;
 	font-size:150%;
 	letter-spacing:.2em;
 	-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
