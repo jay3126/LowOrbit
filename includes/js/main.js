@@ -82,6 +82,7 @@ var lowOrbit = (function (window, document, $) {
 	    }
 
 	    this.backgroundType.subscribe(function(background) {
+	    	//TODO: Audio Mute
 	    	var interval = null;
 		    if (background == 'galleryTemplate') {
 	    		interval = setInterval(lo.rotateSlide, 10000);
