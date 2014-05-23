@@ -12,7 +12,6 @@
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
         <link href="includes/icons/solid.css" rel="stylesheet" type="text/css">
         <link href="includes/app.css" rel="stylesheet" type="text/css">
-        
     </head>
     <body>        
         <div data-bind="click: changeView.bind($data, event, 'issTemplate')" id="toplogo"></div>
@@ -23,9 +22,11 @@
         </div>
 
         <div id="contentwrap" data-bind="template: { name: currentTemplate, afterRender: $root.initUI }">
-            
         </div>
-        
+
+        <div id="backgroundwrap" data-bind="template: { if: backgroundType, name: backgroundType() }">
+        </div>
+
         <div id="disabled">
             <div class="aboutcontent">
             <div class="aboutlogo"></div>
@@ -36,10 +37,7 @@
             </div>
         </div>
 
-        <div id="videowrap">
-            <span data-bind="template: { if: backgroundType, name: backgroundType() }"></span>
-        </div>
-
+        <!-- VIEW TEMPLATES -->
         <script id="streamTemplate" type="text/html">
             <iframe src="http://www.ustream.tv/embed/17074538?v=3&amp;wmode=direct&autoplay=true" frameborder="0" style="border: 0px none transparent;overflow:hidden;height:100%;width:100%" height="100%" width="100%" scrolling=“no”></iframe>
         </script>
@@ -48,8 +46,8 @@
             <iframe id="ytplayer" type="text/html" height="100%" width="100%" src="https://www.youtube.com/embed/P5_GlAOCHyE?autoplay=1&controls=0&loop=1&modestbranding=1&rel=0&showinfo=0&autohide=1&iv_load_policy=3&wmode=opaque" frameborder="0" volume="0"></iframe>
         </script>
 
-        <script id="photoTemplate" type="text/html">
-            <!-- TODO -->
+        <script id="galleryTemplate" type="text/html">
+            <div id="galleryback"></div>
         </script>
 
         <script id="issTemplate" type="text/html">
@@ -136,7 +134,7 @@
                     <div class="optionsrow">
                         <span class="optionsrowtitle">Background</span>
                         <ul>
-                            <li><a data-bind="click: changeBackground.bind($data, event, 'photoTemplate'), css: { selected: backgroundType() == 'photoTemplate' }" href="#">Photo</a></li>
+                            <li><a data-bind="click: changeBackground.bind($data, event, 'galleryTemplate'), css: { selected: backgroundType() == 'galleryTemplate' }" href="#">Photo</a></li>
                             <li><a data-bind="click: changeBackground.bind($data, event, 'videoTemplate'), css: { selected: backgroundType() == 'videoTemplate' }" href="#">Video</a></li>
                             <li><a class="selected" data-bind="click: changeBackground.bind($data, event, 'streamTemplate'), css: { selected: backgroundType() == 'streamTemplate' }" href="#">Stream</a></li>
                         </ul>
@@ -174,6 +172,7 @@
         </div>
         <!-- /ABOUT SECTION -->
         </script>
+        <!-- /VIEW TEMPLATES -->
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')</script>

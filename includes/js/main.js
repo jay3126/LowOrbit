@@ -1,6 +1,7 @@
 var lowOrbit = (function (window, document, $) {
 	var stats,
-		vm;
+		vm,
+		slide_no = 1;
 
 	var lowOrbit = function () {
 		var self = this;
@@ -42,7 +43,7 @@ var lowOrbit = (function (window, document, $) {
 	    this.astronauts = ko.observableArray(stats.astronauts);
 	    
 	    this.displayType = ko.observable('largeHUDTemplate');
-	    this.backgroundType = ko.observable(stats.visibility == 'daylight' ? 'streamTemplate' : 'videoTemplate');
+	    this.backgroundType =  ko.observable(stats.visibility != 'eclipsed' ? 'streamTemplate' : 'videoTemplate');
 	    this.currentTemplate = ko.observable('issTemplate');
 
 		this.location = ko.observable('Ocean');
@@ -79,6 +80,15 @@ var lowOrbit = (function (window, document, $) {
 	    this.changeBackground = function(event, background) {
 	    	self.backgroundType(background);
 	    }
+
+	    this.backgroundType.subscribe(function(background) {
+	    	var interval = null;
+		    if (background == 'galleryTemplate') {
+	    		interval = setInterval(lo.rotateSlide, 10000);
+		    } else {
+		    	clearInterval(interval);
+		    }
+		});
 	};
  
 	lowOrbit.prototype = {
@@ -170,8 +180,16 @@ var lowOrbit = (function (window, document, $) {
 					}
 				}
 			}
+		},
+		rotateSlide: function() {
+			(slide_no == 11) ? slide_no = 1 : slide_no++;
+
+			$('#galleryback').fadeOut('slow', function() {
+				$(this).css('background-image', 'url(includes/slideimgs/'+slide_no+'.jpg)').fadeIn('slow');
+			});
 		}
 	}		
+
 
 return lowOrbit;
 
