@@ -43,7 +43,7 @@
         <div id="contentwrap" data-bind="template: { name: currentTemplate, afterRender: $root.initUI }">
         </div>
 
-        <div id="backgroundwrap" data-bind="template: { if: backgroundType, name: backgroundType() }">
+        <div id="backgroundwrap" data-bind="template: { name: backgroundType, afterRender: $root.initBackground }">
         </div>
 
         <div id="disabled">
@@ -62,7 +62,7 @@
         </script>
 
         <script id="videoTemplate" type="text/html">
-            <iframe id="ytplayer" type="text/html" height="100%" width="100%" src="https://www.youtube.com/embed/P5_GlAOCHyE?autoplay=1&controls=0&loop=1&modestbranding=1&rel=0&showinfo=0&autohide=1&iv_load_policy=3&wmode=opaque" frameborder="0" volume="0"></iframe>
+            <iframe id="ytplayer" type="text/html" height="100%" width="100%" src="https://www.youtube.com/embed/P5_GlAOCHyE?autoplay=1&controls=0&loop=1&modestbranding=1&rel=0&showinfo=0&autohide=1&iv_load_policy=3&enablejsapi=1&playerapiid=ytplayer&wmode=opaque" frameborder="0" volume="0"></iframe>
         </script>
 
         <script id="galleryTemplate" type="text/html">

@@ -47,6 +47,7 @@ var lowOrbit = (function (window, document, $) {
 	    this.currentTemplate = ko.observable('issTemplate');
 
 		this.location = ko.observable('Ocean');
+		this.interval = null;
 
 		ko.computed(function() {
 			$.ajax({
@@ -69,6 +70,18 @@ var lowOrbit = (function (window, document, $) {
 	    	lo.setContent();
 	    }
 
+	    this.initBackground = function() {
+	    	if (self.backgroundType() == 'galleryTemplate') {
+	    		self.interval = setInterval(lo.rotateSlide, 10000);
+		    } else {
+		    	clearInterval(self.interval);
+		    }
+
+		    if (self.backgroundType() == 'videoTemplate') {
+		    	//TODO: Mute
+		    }
+	    }
+
 	    this.changeView = function(event, template) {
 	    	self.currentTemplate(template);
 	    }
@@ -80,16 +93,6 @@ var lowOrbit = (function (window, document, $) {
 	    this.changeBackground = function(event, background) {
 	    	self.backgroundType(background);
 	    }
-
-	    this.backgroundType.subscribe(function(background) {
-	    	//TODO: Audio Mute
-	    	var interval = null;
-		    if (background == 'galleryTemplate') {
-	    		interval = setInterval(lo.rotateSlide, 10000);
-		    } else {
-		    	clearInterval(interval);
-		    }
-		});
 	};
  
 	lowOrbit.prototype = {
