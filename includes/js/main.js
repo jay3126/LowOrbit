@@ -189,7 +189,9 @@ var lowOrbit = (function (window, document, $) {
 			(slide_no == 11) ? slide_no = 1 : slide_no++;
 
 			$('#galleryback').fadeOut('slow', function() {
-				$(this).css('background-image', 'url(includes/slideimgs/'+slide_no+'.jpg)').fadeIn('slow');
+				var imgPath = 'includes/slideimgs/'+slide_no+'.jpg';
+				$('<img/>')[0].src = imgPath;
+				$(this).css('background-image', 'url(' + imgPath + ')').fadeIn('slow');
 			});
 		}
 	}		
