@@ -123,6 +123,7 @@ a.topbtn:hover,a.topbtn:active {
 
 #aboutwrap {
 	overflow: scroll;
+	-webkit-overflow-scrolling: touch;
 }
 
 #disabled {
@@ -584,6 +585,22 @@ a.astronautslink_s:hover, a.astronautslink_s:active {
 	letter-spacing: 3px;
 
 	
+}
+
+/* ERROR */
+
+.errorcopy {
+	color:#8e9ca5;
+	font-size: 24px;
+	text-align: center;
+	padding: 0 40px 60px 40px;
+	line-height: 31px;
+}
+
+.errorsig {
+	font-size: 16px;
+	font-weight: 400;
+	color: #fff;
 }
 
 @media (max-width: 960px),(max-height: 700px) {
