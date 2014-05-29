@@ -82,15 +82,15 @@ var lowOrbit = (function (window, document, $) {
 		    }
 	    }
 
-	    this.changeView = function(event, template) {
+	    this.changeView = function(template) {
 	    	self.currentTemplate(template);
 	    }
 
-	    this.changeDisplay = function(event, display) {
+	    this.changeDisplay = function(display) {
 	    	self.displayType(display);
 	    }
 
-	    this.changeBackground = function(event, background) {
+	    this.changeBackground = function(background) {
 	    	self.backgroundType(background);
 	    }
 	};

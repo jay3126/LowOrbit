@@ -33,11 +33,11 @@
         <meta property="og:site_name" content="LowOrbit"/>
     </head>
     <body>        
-        <div data-bind="click: changeView.bind($data, event, 'issTemplate')" id="toplogo"></div>
+        <div data-bind="click: changeView.bind($data, 'issTemplate')" id="toplogo"></div>
         <div id="topnav">
-            <a href="#" data-bind="click: changeView.bind($data, event, 'issTemplate'), css: { topnav_selected: currentTemplate() == 'issTemplate' }" class="topnav_active topnav_selected">ISS View</a>
-            <a href="#" data-bind="click: changeView.bind($data, event, 'optionsTemplate'), css: { topnav_selected: currentTemplate() == 'optionsTemplate' }" class="topnav_active">Options</a>
-            <a href="#" data-bind="click: changeView.bind($data, event, 'aboutTemplate'), css: { topnav_selected: currentTemplate() == 'aboutTemplate' }" class="topnav_active">About</a>
+            <a href="#" data-bind="click: changeView.bind($data, 'issTemplate'), css: { topnav_selected: currentTemplate() == 'issTemplate' }" class="topnav_active topnav_selected">ISS View</a>
+            <a href="#" data-bind="click: changeView.bind($data, 'optionsTemplate'), css: { topnav_selected: currentTemplate() == 'optionsTemplate' }" class="topnav_active">Options</a>
+            <a href="#" data-bind="click: changeView.bind($data, 'aboutTemplate'), css: { topnav_selected: currentTemplate() == 'aboutTemplate' }" class="topnav_active">About</a>
         </div>
 
         <div id="contentwrap" data-bind="template: { name: currentTemplate, afterRender: $root.initUI }">
@@ -145,17 +145,17 @@
                     <div class="optionsrow">
                         <span class="optionsrowtitle">Data Display</span>
                         <ul>
-                            <li><a data-bind="click: changeDisplay.bind($data, event, false), css: { selected: displayType() == false }" href="#">None</a></li>
-                            <li><a data-bind="click: changeDisplay.bind($data, event, 'smallHUDTemplate'), css: { selected: displayType() == 'smallHUDTemplate' }" href="#">Small</a></li>
-                            <li><a class="selected" data-bind="click: changeDisplay.bind($data, event, 'largeHUDTemplate'), css: { selected: displayType() == 'largeHUDTemplate' }" href="#">Large</a></li>
+                            <li><a data-bind="click: changeDisplay.bind($data, false), css: { selected: displayType() == false }" href="#">None</a></li>
+                            <li><a data-bind="click: changeDisplay.bind($data, 'smallHUDTemplate'), css: { selected: displayType() == 'smallHUDTemplate' }" href="#">Small</a></li>
+                            <li><a class="selected" data-bind="click: changeDisplay.bind($data, 'largeHUDTemplate'), css: { selected: displayType() == 'largeHUDTemplate' }" href="#">Large</a></li>
                         </ul>
                     </div>
                     <div class="optionsrow">
                         <span class="optionsrowtitle">Background</span>
                         <ul>
-                            <li><a data-bind="click: changeBackground.bind($data, event, 'galleryTemplate'), css: { selected: backgroundType() == 'galleryTemplate' }" href="#">Photo</a></li>
-                            <li><a data-bind="click: changeBackground.bind($data, event, 'videoTemplate'), css: { selected: backgroundType() == 'videoTemplate' }" href="#">Video</a></li>
-                            <li><a class="selected" data-bind="click: changeBackground.bind($data, event, 'streamTemplate'), css: { selected: backgroundType() == 'streamTemplate' }" href="#">Stream</a></li>
+                            <li><a data-bind="click: changeBackground.bind($data, 'galleryTemplate'), css: { selected: backgroundType() == 'galleryTemplate' }" href="#">Photo</a></li>
+                            <li><a data-bind="click: changeBackground.bind($data, 'videoTemplate'), css: { selected: backgroundType() == 'videoTemplate' }" href="#">Video</a></li>
+                            <li><a class="selected" data-bind="click: changeBackground.bind($data, 'streamTemplate'), css: { selected: backgroundType() == 'streamTemplate' }" href="#">Stream</a></li>
                         </ul>
                     </div>
                     <div class="optionsquote">
